@@ -12,7 +12,7 @@ class CustomMail {
 	public function __construct($config)
 	{
         $this->debug = isset($config['debug']) ? $config['debug'] : 'false';
-        $this->receiver = isset($config['receiver']) ? $config['receiver'] : 'lzw122333@gmail.com';
+        $this->receiver = isset($config['receiver']) ? $config['receiver'] : '123@gmail.com';
 	}
 
     public function sendEmail(Exception $exception)
