@@ -69,8 +69,8 @@ class JsonResponse
 			$data['status'] = $response->getStatusCode();
 			if ($data['status'] === 200) {
 				$data['data'] = $response->getContent();
-				if ($response->headers->get('Content-Type') === 'application/json' && json_decode($data['data'])) {
-					$data['data'] = json_decode($data['data']);
+				if ($response->headers->get('Content-Type') === 'application/json') {
+					$data['data'] = @json_decode($data['data']);
 				}
 			} else {
 				$data['message'] = $response->getContent();
