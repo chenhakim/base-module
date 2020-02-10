@@ -50,7 +50,7 @@ class UserAgentAnalyze
                         break;
                     case 5: // 语言。
                         if ($value != 'null') {
-                            $data['lang'] = $value;
+                            $data['ua-app-lang'] = $value;
                         }
                         break;
                     case 6: // 系统。
