@@ -77,12 +77,12 @@ class JsonResponse
 				$data['message'] = $response->getContent();
 				$data['data'] = '';
 
-				if ($data['status'] === 422) {
-					$message = @json_decode($data['message']);
-					if ($message) {
-						$data['message'] = head(head($message));
-					}
-				}
+//				if ($data['status'] === 422) {
+//					$message = @json_decode($data['message']);
+//					if ($message) {
+//						$data['message'] = head(head($message));
+//					}
+//				}
 			}
 		} else {
 			$data['data'] = $response;
