@@ -70,19 +70,19 @@ class JsonResponse
 			if ($data['status'] === 200 || $data['status'] === 201) {
 			    $data['status'] = 200;
 				$data['data'] = $response->getContent();
-				if ($response->headers->get('Content-Type') === 'application/json') {
+				if ($response->headers->get('Content-Type') === 'application/json' && $this->isJson($data['data'])) {
 					$data['data'] = @json_decode($data['data']);
 				}
 			} else {
 				$data['message'] = $response->getContent();
 				$data['data'] = '';
 
-//				if ($data['status'] === 422) {
-//					$message = @json_decode($data['message']);
-//					if ($message) {
-//						$data['message'] = head(head($message));
-//					}
-//				}
+				if ($data['status'] === 422 && $this->isJson($data['data'])) {
+					$message = @json_decode($data['message']);
+					if ($message) {
+						$data['message'] = head(head($message));
+					}
+				}
 			}
 		} else {
 			$data['data'] = $response;

@@ -154,3 +154,13 @@ if (! function_exists('check_unique_id')) {
         return strtoupper($ckc_1) == strtoupper($ckc_2);
     }
 }
+
+if (! function_exists('isJson')) {
+    function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
+}
+
+
+
