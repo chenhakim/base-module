@@ -162,6 +162,13 @@ if (! function_exists('isJson')) {
     }
 }
 
+/**
+ * URL base64编码
+ * '+' -> '-'
+ * '/' -> '_'
+ * '=' -> ''
+ * @param $string
+ */
 if (! function_exists('url_safe_base64_encode')) {
 
     function url_safe_base64_encode($data) {
@@ -170,7 +177,13 @@ if (! function_exists('url_safe_base64_encode')) {
         return $data;
     }
 }
-
+/**
+ * URL base64解码
+ * '-' -> '+'
+ * '_' -> '/'
+ * 字符串长度%4的余数，补'='
+ * @param  $string
+ */
 if (! function_exists('url_safe_base64_decode')) {
     function url_safe_base64_decode($data) {
         $data = str_replace(['-','_'], ['+','/'], $data);
