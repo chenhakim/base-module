@@ -166,19 +166,18 @@ if (! function_exists('url_safe_base64_encode')) {
 
     function url_safe_base64_encode($data) {
         $data = base64_encode($data);
-        $data = str_replace('+', ',', $data);
-        $data = str_replace('=', '-', $data);
-        $data = str_replace('/', '_', $data);
+        $data = str_replace(['+','/','='], ['-','_',''], $data);
         return $data;
     }
 }
 
 if (! function_exists('url_safe_base64_decode')) {
     function url_safe_base64_decode($data) {
-        $data = str_replace(',', '+', $data);
-        $data = str_replace('-', '=', $data);
-        $data = str_replace('_', '/', $data);
-        $data = base64_decode($data);
-        return $data;
+        $data = str_replace(['-','_'], ['+','/'], $data);
+        $mod4 = strlen($data) % 4;
+        if ($mod4) {
+            $data .= substr('====', $mod4);
+        }
+        return base64_decode($data);
     }
 }
