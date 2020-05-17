@@ -88,3 +88,44 @@ composer require module/base-module dev-master
 ```php
     AmoyApi::userReportList($param1, $param2, $param3);}
 ```
+
+
+## 安装elastic search
+
+执行第一步安装之后
+找到 `config/app.php` 配置文件中，key为 `providers` 的数组，在数组中添加服务提供者。
+
+```php
+    'providers' => [
+        // ...
+        \Module\ElasticSearch\ElasticSearchProvider::class,
+    ]
+```
+
+找到key为 `aliases` 的数组，在数组中注册Facades。
+
+```php
+    'aliases' => [
+        // ...
+        'ElasticSearch' =>  \Module\ElasticSearch\Facades\ElasticSearchProvider::class,
+    ]
+```
+
+运行 `php artisan vendor:publish` 命令，发布配置和视图文件到项目中。
+
+
+###调用
+```php
+$arrData = [
+            'route' => $strRouteName,
+            'method' => $strMethod,
+            'date' => $nDate,
+            'action' => Route::currentRouteAction(),
+            'version' => $request->input('key'),
+            'datetime' => time(),
+            '_index' => 'amoy-test',
+        ];
+        app('es')->addDocument($arrData);
+        // 或者
+        ElasticSearch::addDocument($arrData); //引用facades
+```
