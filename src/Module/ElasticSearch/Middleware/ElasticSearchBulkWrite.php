@@ -22,7 +22,7 @@ class ElasticSearchBulkWrite
 
     public function terminate($request, $response){
         $documents = app('es')->getDocuments();
-        //需要判断是否有日志
+        // 需要判断是否有日志
         if (count($documents) > 0)
             dispatch(new ElasticSearchLogWrite($documents));
     }
