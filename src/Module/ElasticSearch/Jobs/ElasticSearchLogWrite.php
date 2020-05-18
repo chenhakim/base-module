@@ -34,7 +34,7 @@ class ElasticSearchLogWrite implements ShouldQueue
         foreach ($records as $record) {
             $this->params['body'][] = [
                 'index' => [
-                    '_index' => isset($record['_index']) ? $record['_index'] : config('elasticsearch.log_name'),
+                    '_index' => isset($record['_index']) ? $record['_index'] : config('module-elastic-search.log_name'),
                 ],
             ];
             unset($record['_index'], $record['_type']);

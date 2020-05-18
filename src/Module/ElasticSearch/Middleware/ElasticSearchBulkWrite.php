@@ -24,6 +24,6 @@ class ElasticSearchBulkWrite
         $documents = app('es')->getDocuments();
         // 需要判断是否有日志
         if (count($documents) > 0)
-            dispatch(new ElasticSearchLogWrite($documents))->onQueue(config('elasticsearch.queue_name'));
+            dispatch(new ElasticSearchLogWrite($documents))->onQueue(config('module-elastic-search.queue_name'));
     }
 }
