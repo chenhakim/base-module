@@ -10,7 +10,7 @@ namespace  Module\ElasticSearch\ElasticSearch;
 
 use Monolog\Handler\AbstractProcessingHandler;
 
-class ElasticsearchLogHandler extends AbstractProcessingHandler
+class ElasticSearchLogHandler extends AbstractProcessingHandler
 {
     protected function write(array $record)
     {

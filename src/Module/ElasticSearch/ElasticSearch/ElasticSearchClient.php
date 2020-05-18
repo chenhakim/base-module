@@ -10,7 +10,7 @@ namespace  Module\ElasticSearch\ElasticSearch;
 
 use Elasticsearch\ClientBuilder;
 
-class ElasticsearchClient
+class ElasticSearchClient
 {
     protected $client;
 

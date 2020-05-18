@@ -2,10 +2,11 @@
 
 namespace  Module\ElasticSearch\Middleware;
 
-use App\Jobs\Elasticsearch\ElasticsearchLogWrite;
-use Closure;
 
-class ElasticsearchBulkWrite
+use Closure;
+use Module\ElasticSearch\Jobs\ElasticSearchLogWrite;
+
+class ElasticSearchBulkWrite
 {
     /**
      * Handle an incoming request.
@@ -21,9 +22,8 @@ class ElasticsearchBulkWrite
 
     public function terminate($request, $response){
         $documents = app('es')->getDocuments();
-        Logger('======11111', [$documents]);
         //需要判断是否有日志
         if (count($documents) > 0)
-            dispatch(new ElasticsearchLogWrite($documents));
+            dispatch(new ElasticSearchLogWrite($documents));
     }
 }

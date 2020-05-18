@@ -2,7 +2,7 @@
 namespace Module\ElasticSearch;
 
 use Illuminate\Support\ServiceProvider;
-use Module\ElasticSearch\Elasticsearch\ElasticsearchClient;
+use Module\ElasticSearch\ElasticSearch\ElasticSearchClient;
 
 class ElasticSearchProvider extends ServiceProvider
 {
@@ -29,7 +29,7 @@ class ElasticSearchProvider extends ServiceProvider
 		$this->mergeConfigFrom(__DIR__ . '/config/config.php', 'module-elastic-search');
 
         $this->app->singleton('es',function() {
-            return new ElasticsearchClient();
+            return new ElasticSearchClient();
         });
 	}
 
