@@ -40,7 +40,6 @@ class ElasticSearchLogWrite implements ShouldQueue
             unset($record['_index'], $record['_type']);
             $this->params['body'][] = $record;
         }
-        Logger('+++++', [$this->params]);
 
     }
 
@@ -52,6 +51,5 @@ class ElasticSearchLogWrite implements ShouldQueue
     public function handle()
     {
         $mRsp = app('es')->getClient()->bulk($this->params);
-        Logger('=======222333', [$mRsp, $this->params]);
     }
 }
