@@ -16,7 +16,8 @@
     },
     "autoload": {
         "psr-0": {
-            "Module\\Base\\": "src"
+            "Module\\Base\\": "src",
+            "Module\\ElasticSearch\\": "src"
         },
         "files": [
             "src/Module/Base/common/helpers.php",
