@@ -28,7 +28,7 @@ class ElasticSearchClientProvider extends ServiceProvider
 	{
 		$this->mergeConfigFrom(__DIR__ . '/config/config.php', 'module-elastic-search');
 
-        $this->app->singleton('es',function() {
+        $this->app->singleton('es', function() {
             return new ElasticSearchClient();
         });
 	}
