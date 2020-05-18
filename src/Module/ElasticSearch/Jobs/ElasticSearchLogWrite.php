@@ -35,7 +35,6 @@ class ElasticSearchLogWrite implements ShouldQueue
             $this->params['body'][] = [
                 'index' => [
                     '_index' => isset($record['_index']) ? $record['_index'] : config('elasticsearch.log_name'),
-//                    '_type'  => isset($record['_type']) ? $record['_type'] : 'log', // [types removal] Specifying types in bulk requests is deprecated.
                 ],
             ];
             unset($record['_index'], $record['_type']);
