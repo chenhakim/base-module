@@ -129,3 +129,9 @@ $arrData = [
         // 或者
         ElasticSearch::addDocument($arrData); //引用facades
 ```
+
+### 队列执行
+Supervisor 配置如下队列执行信息，队列名称在config中配置，默认elk-log
+```php
+php artisan queue:work --queue=elk-log
+```

@@ -51,5 +51,7 @@ class ElasticSearchLogWrite implements ShouldQueue
     public function handle()
     {
         $mRsp = app('es')->getClient()->bulk($this->params);
+
+        Logger('elk发送信息返回结果：', [$mRsp]);
     }
 }
