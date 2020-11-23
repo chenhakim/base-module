@@ -12,12 +12,14 @@
         "php": "^5.6 | ^7.0",
         "illuminate/support": "5.4.*|5.5.*|5.6.*|5.7.*",
         "curl/curl": "^2.0",
-        "elasticsearch/elasticsearch": "~7.6.0"
+        "elasticsearch/elasticsearch": "~7.6.0",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-0": {
             "Module\\Base\\": "src",
-            "Module\\ElasticSearch\\": "src"
+            "Module\\ElasticSearch\\": "src",
+            "Module\\GoogleAdmobSsv\\": "src"
         },
         "files": [
             "src/Module/Base/common/helpers.php",

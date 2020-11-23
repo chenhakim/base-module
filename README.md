@@ -135,3 +135,33 @@ Supervisor 配置如下队列执行信息，队列名称在config中配置，默
 ```php
 php artisan queue:work --queue=elk-log
 ```
+
+
+## 安装恶业google admob ssv
+
+执行第一步安装之后
+找到 `config/app.php` 配置文件中，key为 `providers` 的数组，在数组中添加服务提供者。
+
+```php
+    'providers' => [
+        // ...
+        \Module\Base\GoogleAdmobSsv\GoogleAdmobSsvProvider::class,
+    ]
+```
+
+找到key为 `aliases` 的数组，在数组中注册Facades。
+
+```php
+    'aliases' => [
+        // ...
+        'GoogleAdmobSsv' =>  \Module\Base\GoogleAdmobSsv\Facades\GoogleAdmobSsv::class,
+    ]
+```
+
+运行 `php artisan vendor:publish` 命令，发布配置和视图文件到项目中。
+
+### 调用
+
+```php
+     GoogleAdmobSsv::verifyString($strData);
+```
