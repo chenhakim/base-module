@@ -105,7 +105,7 @@ abstract class Http
 				throw new InvalidArgumentException('Base url must be provided.');
 			}
 
-			if ($url{0} === '/') {
+			if ($url[0] === '/') {
 				$url = substr($url, 1);
 			}
 			$url = str_finish($this->base_url, '/') . $url;
