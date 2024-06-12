@@ -21,6 +21,11 @@ class UserAgentAnalyze
     {
         // 取出UserAgent。
         $user_agent = env('HEADER_USER_AGENT', $request->header('user-agent'));
+        // 客户端反馈 uni app无法自定义user-agent，所以这里做了兼容
+        $case_key = $request->header('case-key');
+        if ($case_key == 'uni-app') {
+            $user_agent = $request->header('custom-user-agent');
+        }
 
         // 要并入Request的Header。
         $data = [];
