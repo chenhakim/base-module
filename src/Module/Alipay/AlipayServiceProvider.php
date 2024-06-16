@@ -24,9 +24,9 @@ class AlipayServiceProvider extends ServiceProvider {
      * @return void
      */
     public function setupConfig() {
-        $source_config = realpath( __DIR__ . '/../../config/config.php' );
-        $source_mobile = realpath( __DIR__ . '/../../config/mobile.php' );
-        $source_web = realpath( __DIR__ . '/../../config/web.php' );
+        $source_config = realpath( __DIR__ . '/config/config.php' );
+        $source_mobile = realpath( __DIR__ . '/config/mobile.php' );
+        $source_web = realpath( __DIR__ . '/config/web.php' );
 
         if ( $this->app instanceof LaravelApplication && $this->app->runningInConsole() ) {
             $this->publishes([
