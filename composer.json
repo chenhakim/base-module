@@ -19,7 +19,7 @@
         "psr-0": {
             "Module\\Base\\": "src",
             "Module\\ElasticSearch\\": "src",
-            "Module\\GoogleAdmobSsv\\": "src",
+            "Module\\GoogleAdmobSsv\\": "src"
         },
         "files": [
             "src/Module/Base/common/helpers.php",
