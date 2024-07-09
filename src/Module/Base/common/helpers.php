@@ -194,3 +194,18 @@ if (! function_exists('url_safe_base64_decode')) {
         return base64_decode($data);
     }
 }
+
+if (! function_exists('uniqueid')) {
+    /**
+     * 创建一个分布式唯一ID
+     *
+     * @return string
+     */
+    function uniqueid()
+    {
+        $uniqid = uniqid(gethostname(), true);
+        $md5 = substr(md5($uniqid), 12, 8); // 8位md5
+        $uint = hexdec($md5);
+        return sprintf('%s%010u', date('YmdHis'), $uint);
+    }
+}
