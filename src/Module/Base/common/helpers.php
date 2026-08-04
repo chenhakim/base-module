@@ -24,26 +24,53 @@ if (! function_exists('utf8_urldecode')) {
 }
 
 
+if (! function_exists('resolve_client_ip_from_server')) {
+    function resolve_client_ip_from_server()
+    {
+        $trustedHeaders = [
+            'HTTP_ALI_REAL_CLIENT_IP',
+            'HTTP_TRUE_CLIENT_IP',
+            'HTTP_REMOTEIP',
+        ];
+
+        foreach ($trustedHeaders as $header) {
+            if (!empty($_SERVER[$header])) {
+                $ip = trim((string) $_SERVER[$header]);
+                if (filter_var($ip, FILTER_VALIDATE_IP)) {
+                    return $ip;
+                }
+            }
+        }
+
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ips = explode(',', (string) $_SERVER['HTTP_X_FORWARDED_FOR']);
+            foreach ($ips as $ip) {
+                $ip = trim($ip);
+                if ($ip && strcasecmp($ip, 'unknown') !== 0 && filter_var($ip, FILTER_VALIDATE_IP)) {
+                    return $ip;
+                }
+            }
+        }
+
+        foreach (['REMOTE_ADDR', 'SERVER_ADDR'] as $key) {
+            if (!empty($_SERVER[$key])) {
+                $ip = trim((string) $_SERVER[$key]);
+                if (filter_var($ip, FILTER_VALIDATE_IP)) {
+                    return $ip;
+                }
+            }
+        }
+
+        return '';
+    }
+}
+
 if ( ! function_exists( 'get_client_ip' ) ) {
     /**
      * 获取ip地址
      */
     function get_client_ip(){
-        if(isset($_SERVER['HTTP_REMOTEIP']) && !empty($_SERVER['HTTP_REMOTEIP'])){
-            return $_SERVER['HTTP_REMOTEIP'];
-        }else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && !empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
-            $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-            if(count($ips) > 1){
-                return $ips[1];
-            }
-            return $_SERVER['HTTP_X_FORWARDED_FOR'];
-        }elseif ( isset($_SERVER['SERVER_ADDR']) ) {
-
-            return $_SERVER['SERVER_ADDR'];
-        } else {
-
-            return $_SERVER['REMOTE_ADDR'];
-        }
+        return resolve_client_ip_from_server();
     }
 }
 
@@ -52,21 +79,7 @@ if ( ! function_exists( 'getClientIp' ) ) {
      * 获取ip地址
      */
     function getClientIp(){
-        if(isset($_SERVER['HTTP_REMOTEIP']) && !empty($_SERVER['HTTP_REMOTEIP'])){
-            return $_SERVER['HTTP_REMOTEIP'];
-        }else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && !empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
-            $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-            if(count($ips) > 1){
-                return $ips[1];
-            }
-            return $_SERVER['HTTP_X_FORWARDED_FOR'];
-        }elseif ( isset($_SERVER['REMOTE_ADDR']) ) {
-
-            return $_SERVER['REMOTE_ADDR'];
-        } else {
-
-            return $_SERVER['SERVER_ADDR'];
-        }
+        return resolve_client_ip_from_server();
     }
 }
 
