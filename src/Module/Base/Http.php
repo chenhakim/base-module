@@ -181,9 +181,11 @@ abstract class Http
 			$this->error_message = $error_code . ': ' . ($error_message ?: '未知错误。');
 			return null;
 		}
-		logger('analyzeResponse ' . get_class($this), [
-            'data' => $ret
-        ]); 
+		if ($this->debug && function_exists('logger')) {
+			logger('analyzeResponse ' . get_class($this), [
+				'data' => $ret
+			]);
+		}
 		if (@$ret->status !== 200) {
 			$this->error_message = (@$ret->status ?: $error_code) . ': ' . (@$ret->message ?: '未知错误。');
 			return null;
