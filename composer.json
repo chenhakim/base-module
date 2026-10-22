@@ -12,7 +12,7 @@
         "php": "^5.6 | ^7.0 | ^7.4 | ^8.0",
         "illuminate/support": "5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6|^7|^8",
         "curl/curl": "^2.0",
-        "elasticsearch/elasticsearch": "~7.6.0",
+        "elasticsearch/elasticsearch": "~7.6.0 || ^7.17.3",
         "ext-json": "*"
     },
     "autoload": {
